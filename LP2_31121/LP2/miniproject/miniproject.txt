@@ -1,0 +1,80 @@
+calculator.apex
+
+
+public class calculator {
+      public Double val1 {get;set;}
+    public Double val2 {get;set;}
+    public Double result {get;set;}
+    public String func {get;set;}
+   
+    public calculator()
+    {
+    }
+   
+    public void find()
+    {
+        if(func == 'add')
+        {
+            result = val1+val2;
+        }
+        else if(func == 'sub')
+        {
+             result = val1-val2;
+        }
+        else if(func == 'multi')
+        {
+             result = val1*val2;
+        }
+        else
+        {
+             Integer temp =  math.mod(Integer.valueOf(val1) , Integer.valueOf(val2));
+             result = Double.valueOf(temp);
+        }
+    }
+
+}
+
+calculator.vpf
+
+<apex:page controller="calculator">
+
+<apex:form >
+   
+    <apex:pageBlock >
+        <apex:pageBlockSection >
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Value 1"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:inputText value="{!val1}"/>
+            </apex:pageBlockSectionItem>                          
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Value 2"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:inputText value="{!val2}"/>
+            </apex:pageBlockSectionItem>                         
+            <apex:pageBlockSectionItem >
+                <apex:selectRadio value="{!func}" layout="pageDirection">
+                    <apex:selectOption itemValue="add" itemLabel="add"/>
+                    <apex:selectOption itemValue="sub" itemLabel="sub"/>
+                    <apex:selectOption itemValue="multi" itemLabel="multi"/>
+                </apex:selectRadio>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >               
+            </apex:pageBlockSectionItem>       
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Result"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:inputText value="{!result}" id="res"/><apex:actionStatus id="sts" startText="Finding..."/>
+            </apex:pageBlockSectionItem>                                      
+        </apex:pageBlockSection>   
+        <apex:pageBlockButtons >
+            <apex:commandButton value="Find" action="{!find}" reRender="res"  status="sts"/>
+        </apex:pageBlockButtons>
+    </apex:pageBlock>
+   
+</apex:form>
+
+</apex:page>
