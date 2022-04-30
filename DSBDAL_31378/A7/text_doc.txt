@@ -1,0 +1,1 @@
+Hello everyone! This is a text analysis assignment. We will be using preprocessing methods like Tokenization, POS tagging , stop words removal, stemming and lemmatization.
